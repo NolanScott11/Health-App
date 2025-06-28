@@ -7,6 +7,28 @@
 class food
 {
 public:
+	//constructors
+
+	//default constructor
+	food()
+	{
+		name = "";
+		protein = 0;
+		cals = 0;
+		fat = 0;
+		carbs = 0;
+	}
+
+	//multi-argument constructor
+	food(std::string n, int p, int c, int f, int cb)
+	{
+		name = n;
+		protein = p;
+		cals = c;
+		fat = f;
+		carbs = cb;
+	}
+
 	//setters
 	void setName(std::string s)
 	{
