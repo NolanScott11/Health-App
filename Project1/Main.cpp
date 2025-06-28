@@ -4,6 +4,7 @@ Along with meals. */
 
 #include <iostream>
 #include <iomanip>
+#include "food.h"
 
 using namespace std;
 
