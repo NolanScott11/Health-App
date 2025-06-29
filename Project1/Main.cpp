@@ -5,6 +5,7 @@ Along with meals. */
 #include <iostream>
 #include <iomanip>
 #include "food.h"
+#include <ctime>
 
 using namespace std;
 
@@ -12,8 +13,11 @@ using namespace std;
 // 
 //health page
 void healthPage();
-void fitnessPage();
 //Fitness page
+void fitnessPage();
+
+void logFood();
+
 
 int main()
 {
@@ -22,6 +26,8 @@ int main()
 	//initial display setup
 	do
 	{
+		time_t timestamp;
+		cout << time(&timestamp);
 		cout << "************** Health and Fitness App **************\n\n";
 		cout << "Select 1 to go to the nutrition/health page. Select 2 for the fitness page. Type 0 to quit.\nPlease make selection:";
 		
@@ -93,6 +99,8 @@ void healthPage()
 	switch (input)
 	{
 	case 1:
+		system("CLS");
+		logFood();
 		break;
 	case 2:
 		break;
@@ -149,4 +157,10 @@ void fitnessPage()
 		}
 
 	} while (input != 4);
+}
+
+void logFood()
+{
+
+
 }
