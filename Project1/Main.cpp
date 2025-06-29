@@ -26,9 +26,11 @@ int main()
 	//initial display setup
 	do
 	{
-		time_t timestamp;
-		cout << time(&timestamp);
-		cout << "************** Health and Fitness App **************\n\n";
+		time_t now = time(nullptr); // Get current time
+		char buffer[26];            // Buffer for ctime_s
+		ctime_s(buffer, sizeof(buffer), &now);
+		cout << buffer;
+		cout << "\n************** Health and Fitness App **************\n\n";
 		cout << "Select 1 to go to the nutrition/health page. Select 2 for the fitness page. Type 0 to quit.\nPlease make selection:";
 		
 		cin >> input;
