@@ -4,8 +4,8 @@ Along with meals. */
 
 #include <iostream>
 #include <iomanip>
-#include "food.h"
 #include <ctime>
+#include "log.h"
 
 using namespace std;
 
