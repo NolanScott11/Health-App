@@ -175,8 +175,14 @@ void logFood(vector<logs> info)
 	std::string date(buffer);
 	date = date.substr(4, 6) + date.substr(19, 23);
 	logs number1(date);
+	food item;
 	int i;
 	bool flag = false;
+	std::string name;
+	int p;
+	int c;
+	int f;
+	int cb;
 	for (i = 0; i < info.size(); i++)
 	{
 		if (number1.getDate() == info[i].getDate())
@@ -184,13 +190,12 @@ void logFood(vector<logs> info)
 			flag = true;
 			break;
 		}
-
 	}
 	if (flag == false)
 	{
 		info.push_back(number1);
 	}
-	cout << "Food log options:\n 1. Quick Add(Add calories/protein/carbs manually).\n2. Select food to add.\n3. Go back.\n";
+	cout << "Food log options:\n1. Quick Add(Add calories/protein/carbs manually).\n2. Select food to add.\n3. Go back.\n";
 	int input;
 	cin >> input;
 	while (input < 1 || input > 3)
@@ -203,6 +208,31 @@ void logFood(vector<logs> info)
 	switch (input)
 	{
 	case 1:
+		cout << "Please enter food name: ";
+		cin.ignore();
+		getline(cin, name);
+		item.setName(name);
+		cout << "\nPlease enter the number of calories: ";
+		cin >> c;
+		item.setCals(c);
+		cout << "\nPlease enter the grams of protein: ";
+		cin >> p;
+		item.setProtein(p);
+		cout << "\nPlease enter the grams of fat: ";
+		cin >> f;
+		item.setFat(f);
+		cout << "\nPlease enter the number of carbs: ";
+		cin >> cb;
+		item.setCarbs(cb);
+		if (flag = true)
+		{
+			info[i].addFood(item);
+		}
+		else 
+		{
+			info[info.size() - 1].addFood(item);
+		}
+
 		break;
 	case 2:
 		break;
