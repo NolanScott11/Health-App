@@ -52,23 +52,23 @@ public:
 	}
 
 	//getters
-	std::string getName()
+	std::string getName() const
 	{
 		return name;
 	}
-	int getProtein()
+	int getProtein() const
 	{
 		return protein;
 	}
-	int getCals()
+	int getCals() const
 	{
 		return cals;
 	}
-	int getFat()
+	int getFat() const
 	{
 		return fat;
 	}
-	int getCarbs()
+	int getCarbs() const
 	{
 		return carbs;
 	}

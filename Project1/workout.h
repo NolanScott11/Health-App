@@ -35,12 +35,12 @@ public:
 		minutes = m;
 	}
 	//getters
-	int getWorkoutNum()
+	int getWorkoutNum() const 
 	{
 		return workoutNum;
 	}
 	
-	int getMinutes()
+	int getMinutes() const
 	{
 		return minutes;
 	}

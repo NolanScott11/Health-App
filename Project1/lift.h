@@ -45,19 +45,19 @@ public:
 	}
 
 	//getters
-	std::string getName()
+	std::string getName() const
 	{
 		return liftName;
 	}
-	int getPounds()
+	int getPounds() const
 	{
 		return pounds;
 	}
-	int getReps()
+	int getReps() const
 	{
 		return reps;
 	}
-	int getSets()
+	int getSets() const
 	{
 		return sets;
 	}

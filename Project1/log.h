@@ -10,6 +10,21 @@
 class logs
 {
 public:
+	//operator overloads
+	 friend std::ostream& operator<<(std::ostream& out, const logs& l)
+	{
+		 out << "Info for Log on " << l.getDate();
+		 for (int i = 0; i < l.log.size(); i++)
+		 {
+			 out << "Food number " << i; 
+			 out << "\nName: " << l.log[i].getName();
+			 out << "\nCalories:" << l.log[i].getCals();
+			 out << "\nProtein:" << l.log[i].getProtein();
+			 out << "\nFat:" << l.log[i].getFat();
+			 out << "\nCarbs:" << l.log[i].getCarbs();
+		 }
+		return out;
+	}
 	//constructors
 
 	//default 
@@ -30,13 +45,24 @@ public:
 	}
 
 	//getters
-	std::string getDate()
+	std::string getDate() const
 	{
 		return date;
 	}
-	void addFood(food f)
+
+	//other functions
+	void addFood(food f) 
 	{
 		log.push_back(f);
+	}
+	void printFood(food f) const
+	{
+		std::cout << "\nName: " << f.getName();
+		std::cout << "\nCalories:" << f.getCals();
+		std::cout << "\nProtein:" << f.getProtein();
+		std::cout << "\nFat:" << f.getFat();
+		std::cout << "\nCarbs:" << f.getCarbs();
+		
 	}
 
 private:

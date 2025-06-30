@@ -184,7 +184,7 @@ void logFood(vector<logs> info)
 	int c;
 	int f;
 	int cb;
-	ofstream file("data.txt");
+	
 	for (i = 0; i < info.size(); i++)
 	{
 		if (number1.getDate() == info[i].getDate())
@@ -207,6 +207,8 @@ void logFood(vector<logs> info)
 		cin.ignore(10000000000, '\n');
 		cin >> input;
 	}
+	
+	ofstream file("data.txt");
 	switch (input)
 	{
 	case 1:
@@ -226,15 +228,16 @@ void logFood(vector<logs> info)
 		cout << "\nPlease enter the number of carbs: ";
 		cin >> cb;
 		item.setCarbs(cb);
-		if (flag = true)
+		if (flag == true)
 		{
 			info[i].addFood(item);
+			file << info[i].printFood(item);
 		}
 		else 
 		{
 			info[info.size() - 1].addFood(item);
 		}
-
+		
 		break;
 	case 2:
 		break;
