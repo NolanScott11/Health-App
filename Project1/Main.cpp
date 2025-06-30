@@ -168,13 +168,28 @@ void fitnessPage(vector<logs> info)
 //Create a log object for the first time for that date. Prompts user to add food objects to that date.
 void logFood(vector<logs> info)
 {
+	
 	time_t now = time(nullptr); // Get current time
 	char buffer[26];            // Buffer for ctime_s
 	ctime_s(buffer, sizeof(buffer), &now);
 	std::string date(buffer);
 	date = date.substr(4, 6) + date.substr(19, 23);
 	logs number1(date);
-	for (int i = 0; i < info.size(); i++)
+	int i;
+	bool flag = false;
+	for (i = 0; i < info.size(); i++)
+	{
+		if (number1.getDate() == info[i].getDate())
+		{
+			flag = true;
+			break;
+		}
+
+	}
+	if (flag == false)
+	{
+		info.push_back(number1);
+	}
 	cout << "Food log options:\n 1. Quick Add(Add calories/protein/carbs manually).\n2. Select food to add.\n3. Go back.\n";
 	int input;
 	cin >> input;
