@@ -5,6 +5,7 @@
 #include "food.h"
 #include <vector>
 #include "Date.h"
+#include "workout.h"
 
 class logs
 {
@@ -14,22 +15,22 @@ public:
 	//default 
 	logs()
 	{
-		date = NULL;
+		date = "";
 	}
 
 	//multi-argument
-	logs(Date d)
+	logs(std::string d)
 	{
 		date = d;
 	}
 	//setters
-	void setDate(Date d)
+	void setDate(std::string d)
 	{
 		date = d;
 	}
 
 	//getters
-	Date getDate()
+	std::string getDate()
 	{
 		return date;
 	}
@@ -40,6 +41,7 @@ public:
 
 private:
 	std::vector<food> log;
-	Date date;
+	std::string date;
+	std::vector<workouts> exercise;
 
 };

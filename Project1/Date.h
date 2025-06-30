@@ -1,37 +1,14 @@
 #pragma once
+#include "log.h"
+#include "workout.h"
 
-#include <iostream>
-#include <cstdlib>
-#include <cctype>
-
-class Date
+class date
 {
-	friend std::ostream& operator<<(std::ostream& output, Date d);
-
 public:
-	Date(int d = 0, int m = 0, int yyyy = 0)
-	{
-		setDate(d, m, yyyy);
-	}
 
-	~Date() {}
 
-	void setDate(int  d, int m, int yyyy)
-	{
-		day = d;
-		month = m;
-		year = yyyy;
-	}
+
 
 private:
-	int day;
-	int month;
-	int year;
+
 };
-
-
-inline std::ostream& operator<<(std::ostream& output, Date d)
-{
-	output << d.month << "/" << d.day << "/" << d.year;
-	return output;
-}

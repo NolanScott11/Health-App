@@ -6,22 +6,26 @@ Along with meals. */
 #include <iomanip>
 #include <ctime>
 #include "log.h"
+#include <string>
 
 using namespace std;
 
 //Function prototypes
 // 
 //health page
-void healthPage();
+void healthPage(vector<logs>);
 //Fitness page
-void fitnessPage();
+void fitnessPage(vector<logs>);
 
-void logFood();
+void logFood(vector<logs>);
 
+//global variable
+vector<logs> data;
 
 int main()
 {
 	//variables for menu choices
+	vector<logs> info;
 	int input;
 	//initial display setup
 	do
@@ -29,7 +33,9 @@ int main()
 		time_t now = time(nullptr); // Get current time
 		char buffer[26];            // Buffer for ctime_s
 		ctime_s(buffer, sizeof(buffer), &now);
-		cout << buffer;
+		std::string date(buffer);
+		date = date.substr(4, 6) + date.substr(19, 23);
+		cout << date;
 		cout << "\n************** Health and Fitness App **************\n\n";
 		cout << "Select 1 to go to the nutrition/health page. Select 2 for the fitness page. Type 0 to quit.\nPlease make selection:";
 		
@@ -47,11 +53,11 @@ int main()
 		{
 		case 1:
 			system("CLS");
-			healthPage();
+			healthPage(info);
 			break;
 		case 2:
 			system("CLS");
-			fitnessPage();
+			fitnessPage(info);
 			break;
 		case 0: //Exits loop
 			break;
@@ -73,7 +79,7 @@ int main()
 
 //function definitions
 //HealthPage function: Opens menu and switch case for Health page.
-void healthPage() 
+void healthPage(vector<logs> info)
 {
 	int input;
 	do
@@ -91,9 +97,9 @@ void healthPage()
 
 	cin >> input;
 	//Checks input for valid selection
-	while (input < 1 && input > 7)
+	while (input < 1 || input > 7)
 	{
-		cout << "Invalid choice. Input must be either 1 or 2. Select again:\n";
+		cout << "Invalid choice. Input must be 1-7. Select again:\n";
 		cin.clear();
 		cin.ignore(10000000000, '\n');
 		cin >> input;
@@ -102,7 +108,7 @@ void healthPage()
 	{
 	case 1:
 		system("CLS");
-		logFood();
+		logFood(info);
 		break;
 	case 2:
 		break;
@@ -117,15 +123,12 @@ void healthPage()
 	case 7: //Exits loop
 		break;
 	}
-		
-
-
 	} while (input != 7);
 
 }
 
 //fitnessPage function: Opens menu and switch case for fitness page.
-void fitnessPage()
+void fitnessPage(vector<logs> info)
 {
 	int input;
 	do
@@ -139,9 +142,9 @@ void fitnessPage()
 		cout << "\nPlease make selection:";
 		cin >> input;
 		//Checks input for valid selection
-		while (input < 1 && input > 4)
+		while (input < 1 || input > 4)
 		{
-			cout << "Invalid choice. Input must be either 1 or 2. Select again:\n";
+			cout << "Invalid choice. Input must be 1-4. Select again:\n";
 			cin.clear();
 			cin.ignore(10000000000, '\n');
 			cin >> input;
@@ -161,8 +164,36 @@ void fitnessPage()
 	} while (input != 4);
 }
 
-void logFood()
+
+//Create a log object for the first time for that date. Prompts user to add food objects to that date.
+void logFood(vector<logs> info)
 {
+	time_t now = time(nullptr); // Get current time
+	char buffer[26];            // Buffer for ctime_s
+	ctime_s(buffer, sizeof(buffer), &now);
+	std::string date(buffer);
+	date = date.substr(4, 6) + date.substr(19, 23);
+	logs number1(date);
+	for (int i = 0; i < info.size(); i++)
+	cout << "Food log options:\n 1. Quick Add(Add calories/protein/carbs manually).\n2. Select food to add.\n3. Go back.\n";
+	int input;
+	cin >> input;
+	while (input < 1 || input > 3)
+	{
+		cout << "Invalid choice. Input must be 1-3. Select again:\n";
+		cin.clear();
+		cin.ignore(10000000000, '\n');
+		cin >> input;
+	}
+	switch (input)
+	{
+	case 1:
+		break;
+	case 2:
+		break;
+	case 3:
+		break;
+	}
 
 
 }
