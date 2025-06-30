@@ -16,7 +16,7 @@ public:
 		 out << "\n\nInfo for Log on " << l.getDate();
 		 for (int i = 0; i < l.log.size(); i++)
 		 {
-			 out << "Food number " << i; 
+			 out << "Food number " << (i + 1); 
 			 out << "\nName: " << l.log[i].getName();
 			 out << "\nCalories:" << l.log[i].getCals();
 			 out << "\nProtein:" << l.log[i].getProtein();

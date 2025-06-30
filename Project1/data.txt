@@ -1,0 +1,9 @@
+
+
+Info for Log on Jun 30 2025
+Food number 0
+Name: apple
+Calories:150
+Protein:2
+Fat:1
+Carbs:10
