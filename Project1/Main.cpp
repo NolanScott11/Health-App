@@ -18,10 +18,10 @@ void healthPage(vector<logs>);
 //Fitness page
 void fitnessPage(vector<logs>);
 
-void logFood(vector<logs>);
+void logFood(vector<logs>&);
 
 //global variable
-vector<logs> data;
+
 
 int main()
 {
@@ -167,7 +167,7 @@ void fitnessPage(vector<logs> info)
 
 
 //Create a log object for the first time for that date. Prompts user to add food objects to that date.
-void logFood(vector<logs> info)
+void logFood(vector<logs>& info)
 {
 	
 	time_t now = time(nullptr); // Get current time
@@ -208,7 +208,7 @@ void logFood(vector<logs> info)
 		cin >> input;
 	}
 	
-	ofstream file("data.txt", ios::app);
+	ofstream file("data.txt");
 	switch (input)
 	{
 	case 1:
@@ -231,16 +231,16 @@ void logFood(vector<logs> info)
 		if (flag == true)
 		{
 			info[i].addFood(item);
-			
+			file << info[i];
 		}
 		else 
 		{
 			info[info.size() - 1].addFood(item);
+			file << info[info.size()-1];
 		}
-		for (int i = 0; i < info.size(); i++)
-		{
-			file << info[i];
-		}
+		cout << "\n\n" << info.size() << "\n\n";
+			
+		
 		file.close();
 		break;
 	case 2:

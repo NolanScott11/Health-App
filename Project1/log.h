@@ -13,7 +13,7 @@ public:
 	//operator overloads
 	 friend std::ostream& operator<<(std::ostream& out, const logs& l)
 	{
-		 out << "\n\nInfo for Log on " << l.getDate() << "\n";
+		 
 		 for (int i = 0; i < l.log.size(); i++)
 		 {
 			 out << "Food number " << (i + 1); 
@@ -21,7 +21,7 @@ public:
 			 out << "\nCalories:" << l.log[i].getCals();
 			 out << "\nProtein:" << l.log[i].getProtein();
 			 out << "\nFat:" << l.log[i].getFat();
-			 out << "\nCarbs:" << l.log[i].getCarbs();
+			 out << "\nCarbs:" << l.log[i].getCarbs() << "\n\n";
 		 }
 		return out;
 	}
@@ -48,6 +48,10 @@ public:
 	std::string getDate() const
 	{
 		return date;
+	}
+	int getSize() const
+	{
+		return log.size();
 	}
 
 	//other functions
