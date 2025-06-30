@@ -7,6 +7,7 @@ Along with meals. */
 #include <ctime>
 #include "log.h"
 #include <string>
+#include <fstream>
 
 using namespace std;
 
@@ -183,6 +184,7 @@ void logFood(vector<logs> info)
 	int c;
 	int f;
 	int cb;
+	ofstream file("data.txt");
 	for (i = 0; i < info.size(); i++)
 	{
 		if (number1.getDate() == info[i].getDate())
