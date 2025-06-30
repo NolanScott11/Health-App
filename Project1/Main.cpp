@@ -208,7 +208,7 @@ void logFood(vector<logs> info)
 		cin >> input;
 	}
 	
-	ofstream file("data.txt");
+	ofstream file("data.txt", ios::app);
 	switch (input)
 	{
 	case 1:
