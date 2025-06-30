@@ -13,7 +13,7 @@ public:
 	//operator overloads
 	 friend std::ostream& operator<<(std::ostream& out, const logs& l)
 	{
-		 out << "Info for Log on " << l.getDate();
+		 out << "\n\nInfo for Log on " << l.getDate();
 		 for (int i = 0; i < l.log.size(); i++)
 		 {
 			 out << "Food number " << i; 

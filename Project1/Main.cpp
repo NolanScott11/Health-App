@@ -231,13 +231,17 @@ void logFood(vector<logs> info)
 		if (flag == true)
 		{
 			info[i].addFood(item);
-			file << info[i].printFood(item);
+			
 		}
 		else 
 		{
 			info[info.size() - 1].addFood(item);
 		}
-		
+		for (int i = 0; i < info.size(); i++)
+		{
+			file << info[i];
+		}
+		file.close();
 		break;
 	case 2:
 		break;
