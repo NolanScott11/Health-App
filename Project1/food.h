@@ -7,6 +7,18 @@
 class food
 {
 public:
+	//overload operators
+	friend std::ostream& operator<<(std::ostream& out, const food& f)
+	{
+		out << "\nName: " << f.getName();
+		out << "\nCalories:" << f.getCals();
+		out << "\nProtein:" << f.getProtein();
+		out << "\nFat:" << f.getFat();
+		out << "\nCarbs:" << f.getCarbs() << "\n\n";
+
+		return out;
+	}
+
 	//constructors
 
 	//default constructor
@@ -71,6 +83,17 @@ public:
 	int getCarbs() const
 	{
 		return carbs;
+	}
+
+	//other functions
+	void printFood() const
+	{
+		std::cout << "\nName: " << getName();
+		std::cout << "\nCalories:" << getCals();
+		std::cout << "\nProtein:" << getProtein();
+		std::cout << "\nFat:" << getFat();
+		std::cout << "\nCarbs:" << getCarbs();
+
 	}
 
 private:
