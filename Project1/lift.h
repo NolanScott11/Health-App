@@ -6,6 +6,18 @@
 class lift
 {
 public:
+	//operator overload
+	friend std::ostream& operator<<(std::ostream& out, const lift& l)
+	{
+		out << "\nName: " << l.getName();
+		out << "\nCalories:" << l.getPounds();
+		out << "\nProtein:" << l.getReps();
+		out << "\nFat:" << l.getSets() << "\n\n";
+		
+
+		return out;
+	}
+
 	//constructors
 
 	//default constructor

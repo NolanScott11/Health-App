@@ -18,7 +18,11 @@ void healthPage(vector<logs>);
 //Fitness page
 void fitnessPage(vector<logs>);
 
+//log a food that was eaten to store all nutritional information about it for that day.
 void logFood(vector<logs>&);
+
+//Log lift into whatever workout you did that day.
+void addLift(vector<logs>&);
 
 //global variable
 
@@ -155,6 +159,8 @@ void fitnessPage(vector<logs> info)
 		case 1:
 			break;
 		case 2:
+			system("CLS");
+			addLift(info);
 			break;
 		case 3: 
 			break;
@@ -197,6 +203,9 @@ void logFood(vector<logs>& info)
 	{
 		info.push_back(number1);
 	}
+
+
+
 	cout << "Food log options:\n1. Quick Add(Add calories/protein/carbs manually).\n2. Select food to add.\n3. Go back.\n";
 	int input;
 	cin >> input;
@@ -249,5 +258,87 @@ void logFood(vector<logs>& info)
 		break;
 	}
 
+
+}
+
+void addLift(vector<logs>& info)
+{
+
+	time_t now = time(nullptr); // Get current time
+	char buffer[26];            // Buffer for ctime_s
+	ctime_s(buffer, sizeof(buffer), &now);
+	std::string date(buffer);
+	date = date.substr(4, 6) + date.substr(19, 23);
+	logs number1(date);
+	lift item;
+	int i;
+	bool flag = false;
+	std::string name;
+	int w;
+	int r;
+	int s;
+
+	for (i = 0; i < info.size(); i++)
+	{
+		if (number1.getDate() == info[i].getDate())
+		{
+			flag = true;
+			break;
+		}
+	}
+	if (flag == false)
+	{
+		info.push_back(number1);
+	}
+
+	cout << "Add lift options:\n1. Quick Add(input weight/reps/sets manually).\n2. Select lift to add.\n3. Go back.\n";
+	int input;
+	cin >> input;
+	while (input < 1 || input > 3)
+	{
+		cout << "Invalid choice. Input must be 1-3. Select again:\n";
+		cin.clear();
+		cin.ignore(10000000000, '\n');
+		cin >> input;
+	}
+	ofstream file("data2.txt", ios::app);
+	
+	switch (input)
+	{
+	case 1:
+		cout << "Please enter lift name: ";
+		cin.ignore();
+		getline(cin, name);
+		item.setName(name);
+		cout << "\nPlease enter the weight: ";
+		cin >> w;
+		item.setPounds(w);
+		cout << "\nPlease enter the number of reps: ";
+		cin >> r;
+		item.setReps(r);
+		cout << "\nPlease enter the number of sets: ";
+		cin >> s;
+		item.setSets(s);
+		
+		if (flag == true)
+		{
+			info[i].addLift(item);
+			file << info[i];
+		}
+		else
+		{
+			info[info.size() - 1].addLift(item);
+			file << info[info.size() - 1];
+		}
+		cout << "\n\n" << info.size() << "\n\n";
+
+
+		file.close();
+		break;
+	case 2:
+		break;
+	case 3:
+		break;
+	}
 
 }
