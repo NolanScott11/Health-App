@@ -13,11 +13,17 @@ public:
 	//operator overloads
 	 friend std::ostream& operator<<(std::ostream& out, const logs& l)
 	{
+		 if (l.log.size() != 0)
+		 {
 			 out << "Food number " << (l.log.size());
 			 out << l.log[l.log.size() - 1];
+		 }
 
-			 //out << "Lift number " << (l.exercise.size());
-			 //out << l.exercise[l.exercise.size() - 1];
+		 if (l.exercise.size() != 0)
+		 {
+			 out << "Lift number " << (l.exercise.size());
+			 out << l.exercise[l.exercise.size() - 1];
+		 }
 		 
 		return out;
 	}

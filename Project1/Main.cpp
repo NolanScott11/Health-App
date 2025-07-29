@@ -71,13 +71,6 @@ int main()
 
 
 
-
-
-
-
-
-
-
 	system("pause");
 	return 0;
 }
@@ -301,7 +294,7 @@ void addLift(vector<logs>& info)
 		cin.ignore(10000000000, '\n');
 		cin >> input;
 	}
-	ofstream file("data2.txt", ios::app);
+	ofstream file("data.txt", ios::app);
 	
 	switch (input)
 	{
