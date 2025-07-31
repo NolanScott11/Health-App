@@ -14,9 +14,9 @@ using namespace std;
 //Function prototypes
 // 
 //health page
-void healthPage(vector<logs>);
+void healthPage(vector<logs>&);
 //Fitness page
-void fitnessPage(vector<logs>);
+void fitnessPage(vector<logs>&);
 
 //log a food that was eaten to store all nutritional information about it for that day.
 void logFood(vector<logs>&);
@@ -77,7 +77,7 @@ int main()
 
 //function definitions
 //HealthPage function: Opens menu and switch case for Health page.
-void healthPage(vector<logs> info)
+void healthPage(vector<logs> &info)
 {
 	int input;
 	do
@@ -126,7 +126,7 @@ void healthPage(vector<logs> info)
 }
 
 //fitnessPage function: Opens menu and switch case for fitness page.
-void fitnessPage(vector<logs> info)
+void fitnessPage(vector<logs> &info)
 {
 	int input;
 	do
@@ -210,7 +210,7 @@ void logFood(vector<logs>& info)
 		cin >> input;
 	}
 	
-	ofstream file("data.txt", ios::app);
+	ofstream file("Food.txt");
 	switch (input)
 	{
 	case 1:
@@ -233,14 +233,24 @@ void logFood(vector<logs>& info)
 		if (flag == true)
 		{
 			info[i].addFood(item);
-			file << info[i];
+			for (int j = 0; j < info[i].getFoodSize(); j++)
+			{
+				file << "Food number: " << (j + 1);
+				file << info[i].getFood(j);
+			}
+
+			
 		}
-		else 
+		else
 		{
 			info[info.size() - 1].addFood(item);
-			file << info[info.size()-1];
+			for (int j = 0; j < info[info.size() - 1].getFoodSize(); j++)
+			{
+				file << "Food number: " << (j + 1);
+				file << info[info.size() - 1].getFood(j);
+			}
+			
 		}
-		cout << "\n\n" << info.size() << "\n\n";
 			
 		
 		file.close();
@@ -262,6 +272,7 @@ void addLift(vector<logs>& info)
 	ctime_s(buffer, sizeof(buffer), &now);
 	std::string date(buffer);
 	date = date.substr(4, 6) + date.substr(19, 23);
+	cout << date;
 	logs number1(date);
 	lift item;
 	int i;
@@ -270,11 +281,13 @@ void addLift(vector<logs>& info)
 	int w;
 	int r;
 	int s;
+	
 
 	for (i = 0; i < info.size(); i++)
 	{
 		if (number1.getDate() == info[i].getDate())
 		{
+			cout << info[i].getDate() << "\n";
 			flag = true;
 			break;
 		}
@@ -294,7 +307,7 @@ void addLift(vector<logs>& info)
 		cin.ignore(10000000000, '\n');
 		cin >> input;
 	}
-	ofstream file("data.txt", ios::app);
+	ofstream file("data.txt");
 	
 	switch (input)
 	{
@@ -316,14 +329,22 @@ void addLift(vector<logs>& info)
 		if (flag == true)
 		{
 			info[i].addLift(item);
-			file << info[i];
+			for (int j = 0; j < info[i].getLiftSize(); j++)
+			{
+				file << "Lift number: " << (j + 1);
+				file << info[i].getLift(j);
+			}
 		}
 		else
 		{
 			info[info.size() - 1].addLift(item);
-			file << info[info.size() - 1];
+			for (int j = 0; j < info[info.size() - 1].getLiftSize(); j++)
+			{
+				file << "Lift number: " << (j + 1);
+				file << info[info.size() - 1].getLift(j);
+			}
 		}
-		cout << "\n\n" << info.size() << "\n\n";
+		
 
 
 		file.close();
