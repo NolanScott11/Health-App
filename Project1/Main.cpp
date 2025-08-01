@@ -24,7 +24,18 @@ void logFood(vector<logs>&);
 //Log lift into whatever workout you did that day.
 void addLift(vector<logs>&);
 
+//View goal for the day, which will be total calories, protein, carbs, and fat.
+void viewGoal(vector<logs>& info);
+
+//View progress of workouts over time, such as weight lifted, reps, sets, etc.
+void viewProgress(vector<logs>& info); 
 //global variable
+void createFoods(vector<logs>& info);
+
+	//This function will create a food object and add it to the food vector.
+	//This will be used to create a food database for the user to select from.
+	//This is not implemented yet, but will be in the future.
+
 
 
 int main()
@@ -115,6 +126,8 @@ void healthPage(vector<logs> &info)
 	case 4:
 		break;
 	case 5:
+		system("CLS");
+		viewGoal(info);
 		break;
 	case 6:
 		break;
@@ -135,8 +148,9 @@ void fitnessPage(vector<logs> &info)
 		cout << left << setw(8) << " " << "Make selection:\n";
 		cout << left << setw(8) << " " << "1: Create Workout\n";
 		cout << left << setw(8) << " " << "2: Add lifts\n";
-		cout << left << setw(8) << " " << "3: AI model lift predicitons\n";
-		cout << left << setw(8) << " " << "4: Go back\n";
+		cout << left << setw(8) << " " << "3: View workout progress\n";
+		cout << left << setw(8) << " " << "4: AI model lift predicitons\n";
+		cout << left << setw(8) << " " << "5: Go back\n";
 		cout << "\nPlease make selection:";
 		cin >> input;
 		//Checks input for valid selection
@@ -157,7 +171,9 @@ void fitnessPage(vector<logs> &info)
 			break;
 		case 3: 
 			break;
-		case 4: //Exits loop
+		case 4:
+			break;
+		case 5:
 			break;
 		}
 
@@ -354,5 +370,69 @@ void addLift(vector<logs>& info)
 	case 3:
 		break;
 	}
+
+}
+
+void viewGoal(vector<logs>& info)
+{
+	cout << "Today's progress:\n";
+	int cals = 0;;
+	int fat = 0;
+	int pro = 0;
+	int carbs = 0;
+	if (info.size() == 0)
+	{
+		cout << "No logs for today.\n";
+		return;
+	}
+	if (info[info.size() - 1].getFoodSize() == 0)
+	{
+		cout << "No food logged for today.\n";
+	}
+	else
+	{
+		for (int i = 0; i < info[info.size() - 1].getFoodSize(); i++)
+		{
+			cals += info[info.size() - 1].getFood(i).getCals();
+			fat += info[info.size() - 1].getFood(i).getFat();
+			pro += info[info.size() - 1].getFood(i).getProtein();
+			carbs += info[info.size() - 1].getFood(i).getCarbs();
+		}
+		cout << "Total Calories: " << cals << "\n\n";
+		cout << "Fat: " << fat << "\n";
+		cout << "Protein: " << pro << "\n";
+		cout << "Carbs: " << carbs << "\n";
+	}
+}
+
+
+
+void viewProgress(vector<logs>& info)
+{
+	cout << "Today's workout progress:\n";
+	if (info.size() == 0)
+	{
+		cout << "No logs for today.\n";
+		return;
+	}
+	if (info[info.size() - 1].getLiftSize() == 0)
+	{
+		cout << "No lifts logged for today.\n";
+	}
+	else
+	{
+		for (int i = 0; i < info[info.size() - 1].getLiftSize(); i++)
+		{
+			cout << "Lift: " << info[info.size() - 1].getLift(i).getName() << "\n";
+			cout << "Weight: " << info[info.size() - 1].getLift(i).getPounds() << "\n";
+			cout << "Reps: " << info[info.size() - 1].getLift(i).getReps() << "\n";
+			cout << "Sets: " << info[info.size() - 1].getLift(i).getSets() << "\n\n";
+		}
+	}
+
+}
+
+void createFoods(vector<logs>& info)
+{
 
 }
