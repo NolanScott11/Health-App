@@ -8,6 +8,8 @@ Along with meals. */
 #include "log.h"
 #include <string>
 #include <fstream>
+#include <sstream>   // For std::istringstream
+#include <algorithm> // For std::transform
 
 using namespace std;
 
@@ -29,8 +31,11 @@ void viewGoal(vector<logs>& info);
 
 //View progress of workouts over time, such as weight lifted, reps, sets, etc.
 void viewProgress(vector<logs>& info); 
+
+bool findFoodInDatabase(const std::string& searchName, food& foundFood);
 //global variable
-void createFoods(vector<logs>& info);
+
+
 
 	//This function will create a food object and add it to the food vector.
 	//This will be used to create a food database for the user to select from.
@@ -271,8 +276,28 @@ void logFood(vector<logs>& info)
 		
 		file.close();
 		break;
-	case 2:
-		break;
+	case 2: {
+    std::string searchName;
+    cout << "Enter the food name to search: ";
+    cin.ignore();
+    getline(cin, searchName);
+    food found;
+    if (findFoodInDatabase(searchName, found)) {
+        cout << "Food found: " << found.getName() << "\n";
+        cout << "Calories: " << found.getCals() << "\n";
+        cout << "Protein: " << found.getProtein() << "\n";
+        cout << "Fat: " << found.getFat() << "\n";
+        cout << "Carbs: " << found.getCarbs() << "\n";
+        if (flag == true) {
+            info[i].addFood(found);
+        } else {
+            info[info.size() - 1].addFood(found);
+        }
+    } else {
+        cout << "Food not found in database.\n";
+    }
+    break;
+}
 	case 3:
 		break;
 	}
@@ -432,7 +457,34 @@ void viewProgress(vector<logs>& info)
 
 }
 
-void createFoods(vector<logs>& info)
-{
-
+// Searches Food.txt for a food by name and returns a food object if found.
+// Returns true and fills the food object if found, false otherwise.
+bool findFoodInDatabase(const std::string& searchName, food& foundFood) {
+    std::ifstream file("Food.txt");
+    if (!file.is_open()) {
+        std::cerr << "Could not open Food.txt\n";
+        return false;
+    }
+    std::string line;
+    while (std::getline(file, line)) {
+        std::istringstream iss(line);
+        std::string name;
+        int cals, protein, fat, carbs;
+        if (std::getline(iss, name, ',') &&
+            iss >> cals && iss.get() &&
+            iss >> protein && iss.get() &&
+            iss >> fat && iss.get() &&
+            iss >> carbs) {
+            // Case-insensitive comparison
+            std::string lowerName = name, lowerSearch = searchName;
+            std::transform(lowerName.begin(), lowerName.end(), lowerName.begin(), ::tolower);
+            std::transform(lowerSearch.begin(), lowerSearch.end(), lowerSearch.begin(), ::tolower);
+            if (lowerName == lowerSearch) {
+                foundFood = food(name, protein, cals, fat, carbs);
+                return true;
+            }
+        }
+    }
+    return false;
 }
+
