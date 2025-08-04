@@ -135,6 +135,9 @@
     <ClInclude Include="lift.h" />
     <ClInclude Include="log.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="foodDatabase.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

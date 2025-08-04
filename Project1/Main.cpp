@@ -460,26 +460,33 @@ void viewProgress(vector<logs>& info)
 // Searches Food.txt for a food by name and returns a food object if found.
 // Returns true and fills the food object if found, false otherwise.
 bool findFoodInDatabase(const std::string& searchName, food& foundFood) {
-    std::ifstream file("Food.txt");
+    std::ifstream file("foodDatabase.txt");
     if (!file.is_open()) {
-        std::cerr << "Could not open Food.txt\n";
+        std::cerr << "Could not open foodDatabase.txt\n";
         return false;
     }
     std::string line;
     while (std::getline(file, line)) {
         std::istringstream iss(line);
-        std::string name;
-        int cals, protein, fat, carbs;
-        if (std::getline(iss, name, ',') &&
-            iss >> cals && iss.get() &&
-            iss >> protein && iss.get() &&
-            iss >> fat && iss.get() &&
-            iss >> carbs) {
+        std::string name, calsStr, proteinStr, fatStr, carbsStr;
+        // Read tab-separated fields
+        if (std::getline(iss, name, '\t') &&
+            std::getline(iss, calsStr, '\t') &&
+            std::getline(iss, proteinStr, '\t') &&
+            std::getline(iss, fatStr, '\t') &&
+            std::getline(iss, carbsStr, '\t')) {
+
             // Case-insensitive comparison
             std::string lowerName = name, lowerSearch = searchName;
             std::transform(lowerName.begin(), lowerName.end(), lowerName.begin(), ::tolower);
             std::transform(lowerSearch.begin(), lowerSearch.end(), lowerSearch.begin(), ::tolower);
+
             if (lowerName == lowerSearch) {
+                // Convert strings to integers
+                int cals = std::stoi(calsStr);
+                int protein = std::stoi(proteinStr);
+                int fat = std::stoi(fatStr);
+                int carbs = std::stoi(carbsStr);
                 foundFood = food(name, protein, cals, fat, carbs);
                 return true;
             }
