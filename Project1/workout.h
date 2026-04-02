@@ -1,56 +1,34 @@
 //workout object which includes a group of lifts.
-
 #pragma once
 #include "lift.h"
 #include <vector>
-
-
+#include <string>
 class workouts
 {
 public:
 	//constructors
-
-	//default 
 	workouts()
 	{
-		workoutNum = 0;
+		workoutName = "";
 		minutes = 0;
 	}
-
-	//multi-argument
-	workouts(int num, int m)
+	workouts(std::string name, int m)
 	{
-		workoutNum = num;
-		
+		workoutName = name;
 		minutes = m;
 	}
 	//setters
-	void setWorkoutNum(int num)
-	{
-		workoutNum = num;
-	}
-	
-	void setMinutes(int m)
-	{
-		minutes = m;
-	}
+	void setWorkoutName(std::string name) { workoutName = name; }
+	void setMinutes(int m) { minutes = m; }
 	//getters
-	int getWorkoutNum() const 
-	{
-		return workoutNum;
-	}
-	
-	int getMinutes() const
-	{
-		return minutes;
-	}
-	void addLift(lift l)
-	{
-		workout.push_back(l);
-	}
+	std::string getWorkoutName() const { return workoutName; }
+	int getMinutes() const { return minutes; }
+	int getLiftCount() const { return (int)workout.size(); }
+	lift getLift(int i) const { return workout[i]; }
+	void addLift(lift l) { workout.push_back(l); }
 
 private:
 	std::vector<lift> workout;
-	int workoutNum;
+	std::string workoutName;
 	int minutes;
 };
