@@ -1,0 +1,3 @@
+LOG Apr  2 202
+FOOD Steak|200|28|12|4
+ENDLOG
