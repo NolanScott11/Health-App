@@ -25,7 +25,7 @@ string todayDate()
     ctime_r(&now, buffer);                   // GCC / Linux
 #endif
     string d(buffer);
-    return d.substr(4, 6) + d.substr(19, 4); // e.g. "Apr  2 2026"
+    return d.substr(4, 6) + d.substr(19, 5); // e.g. "Apr  2 2026"
 }
 
 void clearScreen() { system("CLS"); }
